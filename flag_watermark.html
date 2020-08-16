@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="renderer" content="webkit"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>jQuery模拟水印</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <style>
+    .contentBox {
+      border: 2px solid #000;
+      width: 300px;
+      margin: 0 auto;
+    }
+    .head {
+      border: 1px solid red;
+      height: 100px;
+    }
+    .main {
+      border: 1px solid orange;
+      height: 150px;
+      position: relative;
+      overflow: hidden;
+    }
+    .foot {
+      border: 1px solid yellow;
+      height: 200px;
+    }
+    .watermark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: .4;
+      transform: rotate(-45deg);
+      width: max-content;
+      width: -moz-max-content;
+      width: -webkit-max-content;
+    }
+  </style>
+</head>
+<body>
+  <div class="contentBox">
+    <div class="head"></div>
+    <div class="main">
+      <img src="./11.jpg" alt="">
+    </div>
+    <div class="foot"></div>
+  </div>
+
+  <script src="https://cdn.staticfile.org/jquery/1.11.3/jquery.min.js"></script>
+  <script>
+    let mainWidth = $('.main').width();
+    let mainHeight = $('.main').height();
+    let watermarkWidth = 90; // 水印横向间隔
+    let watermarkHeight = 60; // 水印纵向间隔
+    // console.log(Math.floor(mainWidth/watermarkWidth));
+    // console.log(Math.floor(mainHeight/watermarkHeight));
+    let mathTop = Math.floor(Math.random() * 10);
+    let mathLeft = Math.floor(Math.random() * 10);
+    for (let i = 0; i < Math.ceil(mainHeight/watermarkHeight); i++) {
+      for (let j = 0; j < Math.ceil(mainWidth/watermarkWidth); j++) {
+        $('.main').append(`
+          <span class="watermark" style="left: ${j * watermarkWidth + mathTop}px;top: ${i * watermarkHeight + mathLeft}px;">水印水印</span>
+        `);
+      }
+    }
+  </script>
+</body>
+</html>
